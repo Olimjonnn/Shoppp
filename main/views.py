@@ -1,5 +1,3 @@
-
-import re
 from rest_framework.authtoken.models import Token
 from django.shortcuts import render,redirect
 from rest_framework.response import Response
@@ -26,6 +24,29 @@ class Slider(ListAPIView):
         slider = Product.objects.all().order_by('-rating')[:5]
         ser = ProductSerializer(slider, many=True)
         return Response(ser.data)
+
+
+class User_addressView(APIView):
+    def get(self, request):
+        us = User_address.objects.all().order_by("-id")
+        usss = User_addressSerializer(us, many=True)
+        return Response(usss.data)
+
+class EmailView(CreateAPIView):
+    queryset = Email.objects.all()
+    serializer_class = EmailSerializer
+
+
+class ImageView(ListAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+
+
+
+
+
+
 
 @api_view(['GET'])
 def latest_products(request):
@@ -167,6 +188,15 @@ def total_card(request):
     return Response(DATA)
 
 
+@api_view(['POST'])
+def card_post(self, request, pk):
+    # card = request.GET['card']
+    car = Card.objects.get(id=pk)
+    car.delete()
+    order = Order.objects.create(car=car)
+    order.save()
+    
+    return Response(status=200)
 
 class WishlistView(APIView):
     def post(self, request):

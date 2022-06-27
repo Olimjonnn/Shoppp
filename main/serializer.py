@@ -13,6 +13,12 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class User_addressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_address
+        fields = '__all__'
+
+
 
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:

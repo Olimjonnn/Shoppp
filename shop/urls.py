@@ -15,6 +15,7 @@ urlpatterns = [
     path("reviewpost/", RewievPost.as_view()),
     path("card/", CardView.as_view()),
     path("cart-total/", total_card),
+    path("cart-post/<int:pk>", card_post),
     path("wishlist/", WishlistView.as_view()),
     path("blog/", BlogView.as_view()),
     path("blog-text/", BlogtextView.as_view()),
